@@ -1,0 +1,61 @@
+#!/bin/bash
+clear
+#----------- BANNER-------------------
+
+echo "
+
+ _  _    __    __   
+( )/ )  /__\  (  )  
+ )  (  /(__)\  )(__ 
+(_)\_)(__)(__)(____)
+
+
+"
+#------------------source list--------------
+
+echo "
+deb http://deb.debian.org/debian buster main
+deb-src http://deb.debian.org/debian buster main
+
+deb http://deb.debian.org/debian-security/ buster/updates main
+deb-src http://deb.debian.org/debian-security/ buster/updates main
+
+deb http://deb.debian.org/debian buster-updates main
+deb-src http://deb.debian.org/debian buster-updates main
+" > /etc/apt/sources.list
+
+#-----------------vbox ----------------------
+
+apt update && apt install build-essential module-assistant dkms -y
+m-a prepare
+FILE=/media/cdrom0/VBoxLinuxAdditions.run
+if [ ! -f "$FILE" ]; then
+	while true; do
+    	read -p "Insert Guest additions from 'Devices > Insert Guest addtions CD Image'. Once done press "Y" to continue: " yn
+    	case $yn in
+       	 [Yy]* ) break;;
+       	 [Nn]* ) exit;;
+       	 * ) echo "Please Insert Guest additions.";;
+   	 esac
+	done
+fi
+cp /media/cdrom0/VBoxLinuxAdditions.run ./
+chmod 777 VBoxLinuxAdditions.run
+./VBoxLinuxAdditions.run
+rm VBo*
+
+#------------------Display--------------------
+
+apt install plank materia-gtk-theme -y
+wget https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1OTQ3NDM2NzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImNhNTBjZjk4MGU0MzBhM2E3OWUxOWJmM2UxMzNlOTk0MjJkYzgwNGFiZDU5N2YwNmYyYmJmYmZmODE4Nzk2Y2YwMGIwN2UyZWM0YzVkY2RlNzY5NmNlM2NmOThkYWE3YzRlY2E3NTdjODg1Yzg1YWFjNmJiYjUzNWEzYmNkZTgxIiwidCI6MTYwMDQ0MDQ1Mywic3RmcCI6IjlkNDY4ZTczY2NkMWY4NzgwNGE4ZmFmNGNhNTc3MjE5Iiwic3RpcCI6IjEyMi4xNzEuMjI2LjY2In0.IIcKgQFXFvq94DkRbLuOwoBaS3orvu2P-7ZdEyYMJ7Q/02-Flat-Remix-Blue-Dark_20200714.tar.xz -P /tmp/
+tar xvf /tmp/02-Flat-Remix-Blue-Dark_20200714.tar.xz -C /usr/share/icons/
+rm 02-Flat-Remix-Blue-Dark_20200714.tar.xz
+xfconf-query -c xsettings -p /Net/ThemeName -s "Materia-Dark"
+xfconf-query -c xfwm4 -p /general/theme -s "Materia-dark"
+xfconf-query -c xsettings -p /Net/IconThemeName -s "Flat-Remix-Blue-Dark"
+echo "GRUB_BACKGROUND="/root/Downloads/kal_grub_bg.png"" >> /etc/default/grub
+update-grub
+
+#-----------------   ---------------------------
+
+
