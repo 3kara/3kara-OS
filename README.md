@@ -2,4 +2,4 @@
 
 Welcome to the officical 3kara OS Repo hosting the script for setting up 3kara OS on a fresh debain installation.
 
-Download the debian base from here http://github.com - automatic! [GitHub](http://github.com)
+Download the latest debian base from [here](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/)
