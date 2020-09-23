@@ -59,6 +59,14 @@ xfconf-query -c xsettings -p /Net/IconThemeName -s "Flat-Remix-Blue-Dark"
 xfconf-query -c xfwm4 -p /general/show_dock_shadow -s false
 cp /usr/share/applications/plank.desktop /etc/xdg/autostart/plank.desktop
 rm ~/.config/plank/dock1/launchers/firefox-esr-1.dockitem ~/.config/plank/dock1/launchers/org.xfce.Parole.dockitem ~/.config/plank/dock1/launchers/io.github.quodlibet.QuodLibet.dockitem
+(
+echo [PlankDockItemPreferences]
+echo Launcher=file:///usr/share/applications/xfce4-terminal.desktop
+)>"~/.config/plank/dock1/launchers/xfce4-terminal.dockitem"
+(
+echo [PlankDockItemPreferences]
+echo Launcher=file:///usr/share/applications/Thunar.desktop
+)>"~/.config/plank/dock1/launchers/Thunar.dockitem"
 echo "GRUB_BACKGROUND="/root/Downloads/kal_grub_bg.png"" >> /etc/default/grub
 update-grub
 
