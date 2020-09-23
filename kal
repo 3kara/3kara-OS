@@ -11,6 +11,8 @@ echo "
 
 
 "
+cd /tmp/
+
 #------------------source list--------------
 
 echo "
@@ -46,13 +48,17 @@ rm VBo*
 
 #------------------Display--------------------
 
-apt install plank materia-gtk-theme -y
+apt install plank materia-gtk-theme fonts-roboto -y
+nohup plank &
 wget https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1OTQ3NDM2NzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImNhNTBjZjk4MGU0MzBhM2E3OWUxOWJmM2UxMzNlOTk0MjJkYzgwNGFiZDU5N2YwNmYyYmJmYmZmODE4Nzk2Y2YwMGIwN2UyZWM0YzVkY2RlNzY5NmNlM2NmOThkYWE3YzRlY2E3NTdjODg1Yzg1YWFjNmJiYjUzNWEzYmNkZTgxIiwidCI6MTYwMDQ0MDQ1Mywic3RmcCI6IjlkNDY4ZTczY2NkMWY4NzgwNGE4ZmFmNGNhNTc3MjE5Iiwic3RpcCI6IjEyMi4xNzEuMjI2LjY2In0.IIcKgQFXFvq94DkRbLuOwoBaS3orvu2P-7ZdEyYMJ7Q/02-Flat-Remix-Blue-Dark_20200714.tar.xz -P /tmp/
 tar xvf /tmp/02-Flat-Remix-Blue-Dark_20200714.tar.xz -C /usr/share/icons/
 rm 02-Flat-Remix-Blue-Dark_20200714.tar.xz
 xfconf-query -c xsettings -p /Net/ThemeName -s "Materia-Dark"
 xfconf-query -c xfwm4 -p /general/theme -s "Materia-dark"
 xfconf-query -c xsettings -p /Net/IconThemeName -s "Flat-Remix-Blue-Dark"
+xfconf-query -c xfwm4 -p /general/show_dock_shadow -s false
+cp /usr/share/applications/plank.desktop /etc/xdg/autostart/plank.desktop
+rm ~/.config/plank/dock1/launchers/firefox-esr-1.dockitem ~/.config/plank/dock1/launchers/org.xfce.Parole.dockitem ~/.config/plank/dock1/launchers/io.github.quodlibet.QuodLibet.dockitem
 echo "GRUB_BACKGROUND="/root/Downloads/kal_grub_bg.png"" >> /etc/default/grub
 update-grub
 
