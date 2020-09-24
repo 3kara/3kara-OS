@@ -6,3 +6,7 @@ Download the latest debian base from [here.](https://cdimage.debian.org/debian-c
 
 Run 3kara script with sudo permission to setup the 3kara configuration in the system. Post execution of the script, manual configuration need to be made to get the full experiance of 3kara OS.
 
+## To-Do List
+
+change font size and style.
+change shell and style of terminal
